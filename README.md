@@ -34,6 +34,8 @@ mock stock game v1.1.3
 판매 : 주식을 판매합니다.
 
 
+
+
 Made by busi
 
 Bug report at https://litt.ly/busi
