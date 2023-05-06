@@ -55,6 +55,6 @@ mock stock game v1.1.3
 
 
 # 개발자 정보
-**Made by busi
+**Made by busi**
 
-**Bug report at https://litt.ly/busi
+**Bug report at https://litt.ly/busi**
