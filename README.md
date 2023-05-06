@@ -35,4 +35,5 @@ mock stock game v1.1.3
 
 
 Made by busi
+
 Bug report at https://litt.ly/busi
