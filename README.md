@@ -1,5 +1,5 @@
-# mock_stock_game_1.1.2
-mock_stock_game_1.1.2
+# mock_stock_game_1.1.3
+mock_stock_game_1.1.3
 
 모의 주식 게임 v1.1.3
 
