@@ -1,7 +1,7 @@
 # mock_stock_game_1.1.2
 mock_stock_game_1.1.2
 
-모의 주식 게임 v1.1.2
+모의 주식 게임 v1.1.3
 
 - 이용 방법
 
@@ -32,3 +32,7 @@ mock_stock_game_1.1.2
 갱신 : 주식 가격을 갱신합니다.
 구매 : 주식을 구매합니다.
 판매 : 주식을 판매합니다.
+
+
+Made by busi
+Bug report at https://litt.ly/busi
