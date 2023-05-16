@@ -157,6 +157,7 @@ print('''
 
 모의 주식에 투자하여 수익을 내는 가상 게임입니다.
 '!도움말'을 입력하여 게임이용에 관한 도움말을 볼 수 있습니다.
+
 Made by busi
 문의 및 버그제보 : https://litt.ly/busi
 ''')
@@ -376,6 +377,7 @@ while True:
                                 '''.format(sell_num, stock_1*sell_num))
                                 stock_1_own += -sell_num
                                 money += stock_1*sell_num 
+                                stock_1_pp += -stock_1*sell_num
                             else:
                                 print('''
 ------------------------
@@ -399,6 +401,7 @@ while True:
                                 '''.format(sell_num, stock_2*sell_num))
                                 stock_2_own += -sell_num
                                 money += stock_2*sell_num
+                                stock_2_pp += -stock_2*sell_num
                             else:
                                 print('''
 ------------------------
@@ -422,6 +425,7 @@ while True:
                                 '''.format(sell_num, stock_3*sell_num))
                                 stock_3_own += -sell_num
                                 money += stock_3*sell_num
+                                stock_3_pp += -stock_3*sell_num
                             else:
                                 print('''
 ------------------------
