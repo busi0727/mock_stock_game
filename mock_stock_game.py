@@ -152,7 +152,14 @@ play_message = '''
 play = False
 #초기 설정 끝
 
-print(''''!도움말'을 입력하여 게임이용에 관한 도움말을 볼 수 있습니다.          Made by KEH''')
+print('''
+<모의 주식 게임>
+
+모의 주식에 투자하여 수익을 내는 가상 게임입니다.
+'!도움말'을 입력하여 게임이용에 관한 도움말을 볼 수 있습니다.
+Made by busi
+문의 및 버그제보 : https://litt.ly/busi
+''')
 
 while True:
     command = str(input())
