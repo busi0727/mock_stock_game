@@ -197,6 +197,10 @@ while True:
         stock_1_pp = 0
         stock_2_pp = 0
         stock_3_pp = 0
+        # pn = purchase num
+        stock_1_pn = 0
+        stock_2_pn = 0
+        stock_3_pn = 0
         start = 100
 
         money = 100000
@@ -260,7 +264,7 @@ while True:
                 elif command[1] == '명령어':
                     print(stock_command_info)
                 elif command[1] == '갱신':
-                    if int(time.time() - start) >= 60:
+                    if int(time.time() - start) >= 0:
                         stock_play()
                         print('''
 ------------------------
@@ -281,9 +285,9 @@ while True:
 삼선전자 : {:,}주 / 총 {:,}원 / 이익 {:,}
 데슬라 : {:,}주 / 총 {:,}원 / 이익 {:,}
 ------------------------
-                    '''.format(stock_1_own, stock_1*stock_1_own, stock_1*stock_1_own-stock_1_pp,\
-                               stock_2_own, stock_2*stock_2_own, stock_2*stock_2_own-stock_2_pp,\
-                                stock_3_own, stock_3*stock_3_own, stock_3*stock_3_own-stock_3_pp))
+                    '''.format(stock_1_own, stock_1*stock_1_own, (stock_1*stock_1_own)-(stock_1_pp*stock_1_pn),\
+                               stock_2_own, stock_2*stock_2_own, (stock_2*stock_2_own)-(stock_2_pp*stock_2_pn),\
+                                stock_3_own, stock_3*stock_3_own, (stock_3*stock_3_own)-(stock_3_pp*stock_3_pn)))
                 elif command[1] == '구매':
                     purchase_stock = input('구매할 주식 : ')
                     if purchase_stock == '까까오':
@@ -303,7 +307,8 @@ while True:
             '''.format(purchase_num, stock_1*purchase_num))
                                 stock_1_own += purchase_num
                                 money += -stock_1*purchase_num
-                                stock_1_pp += stock_1*purchase_num
+                                stock_1_pp += stock_1
+                                stock_1_pn += purchase_num
                             else:
                                 print('''
 ------------------------
@@ -327,7 +332,8 @@ while True:
             '''.format(purchase_num, stock_2*purchase_num))
                                 stock_2_own += purchase_num
                                 money += -stock_2*purchase_num
-                                stock_2_pp += stock_2*purchase_num
+                                stock_2_pp += stock_2
+                                stock_2_pn += purchase_num
                             else:
                                 print('''
 ------------------------
@@ -351,7 +357,8 @@ while True:
             '''.format(purchase_num, stock_3*purchase_num))
                                 stock_3_own += purchase_num
                                 money += -stock_3*purchase_num
-                                stock_3_pp += stock_3*purchase_num
+                                stock_3_pp += stock_3
+                                stock_3_pn += purchase_num
                             else:
                                 print('''
 ------------------------
@@ -377,7 +384,7 @@ while True:
                                 '''.format(sell_num, stock_1*sell_num))
                                 stock_1_own += -sell_num
                                 money += stock_1*sell_num 
-                                stock_1_pp += -stock_1*sell_num
+                                stock_1_pn += -sell_num
                             else:
                                 print('''
 ------------------------
@@ -401,7 +408,7 @@ while True:
                                 '''.format(sell_num, stock_2*sell_num))
                                 stock_2_own += -sell_num
                                 money += stock_2*sell_num
-                                stock_2_pp += -stock_2*sell_num
+                                stock_2_pn += -sell_num
                             else:
                                 print('''
 ------------------------
@@ -425,7 +432,7 @@ while True:
                                 '''.format(sell_num, stock_3*sell_num))
                                 stock_3_own += -sell_num
                                 money += stock_3*sell_num
-                                stock_3_pp += -stock_3*sell_num
+                                stock_3_pn += -sell_num
                             else:
                                 print('''
 ------------------------
