@@ -1,5 +1,6 @@
 import random
 import time
+import math
 
 # 주식이 올랐다!
 def stock_up(chs_):
@@ -224,7 +225,9 @@ while True:
 보유 : 보유하고 있는 주식을 보여줍니다.
 갱신 : 주식 가격을 갱신합니다.
 구매 : 주식을 구매합니다.
+- 풀매수 : 주식을 살 수 있을 만큼 구매합니다.
 판매 : 주식을 판매합니다.
+- 풀매도 : 주식을 팔 수 있을 만큼 구매합니다.
 -----------------
         '''
         while True:
@@ -298,23 +301,44 @@ while True:
 ------------------------    
                     ''')
                         else:
-                            purchase_num = int(input('구매할 수량 : '))
-                            if stock_1*purchase_num <= money:
-                                print('''
+                            try:
+                                purchase_num = str(input('구매할 수량 : '))
+                                if purchase_num != '풀매수':
+                                    if stock_1*int(purchase_num) <= money:
+                                        purchase_num = int(purchase_num)
+                                        print('''
 ------------------------
 까까오 {:,}주를 {:,}원에 구매하셨습니다.
 ------------------------
-            '''.format(purchase_num, stock_1*purchase_num))
-                                stock_1_own += purchase_num
-                                money += -stock_1*purchase_num
-                                stock_1_pp += stock_1
-                                stock_1_pn += purchase_num
-                            else:
-                                print('''
+                    '''.format(purchase_num, stock_1*purchase_num))
+                                        stock_1_own += purchase_num
+                                        money += -stock_1*purchase_num
+                                        stock_1_pp += stock_1
+                                        stock_1_pn += purchase_num
+                                    else:
+                                        print('''
 ------------------------
 돈이 {:,}원 부족합니다.
 ------------------------
-            '''.format(stock_1*purchase_num-money))
+                    '''.format(stock_1*purchase_num-money))
+                                else:
+                                        all_purchase_num = math.floor(money/stock_1)
+                                        print('''
+------------------------
+까까오 {:,}주를 {:,}원에 풀매수 하셨습니다.
+------------------------
+                    '''.format(all_purchase_num, stock_1*all_purchase_num))
+                                        stock_1_own += all_purchase_num
+                                        money += -(all_purchase_num * stock_1)
+                                        stock_1_pp += stock_1
+                                        stock_1_pn += all_purchase_num
+                            except:
+                                print('''
+------------------------
+잘못된 값입니다.
+------------------------    
+                    ''')
+
                     elif purchase_stock == '삼선전자':
                         if stock_2<1000:
                             print('''
@@ -323,23 +347,44 @@ while True:
 ------------------------    
                     ''')
                         else:
-                            purchase_num = int(input('구매할 수량 : '))
-                            if stock_2*purchase_num <= money:
-                                print('''
+                            try:
+                                purchase_num = str(input('구매할 수량 : '))
+                                if purchase_num != '풀매수':
+                                    if stock_2*int(purchase_num) <= money:
+                                        purchase_num = int(purchase_num)
+                                        print('''
 ------------------------
 삼선전자 {:,}주를 {:,}원에 구매하셨습니다.
 ------------------------
-            '''.format(purchase_num, stock_2*purchase_num))
-                                stock_2_own += purchase_num
-                                money += -stock_2*purchase_num
-                                stock_2_pp += stock_2
-                                stock_2_pn += purchase_num
-                            else:
-                                print('''
+                    '''.format(purchase_num, stock_2*purchase_num))
+                                        stock_2_own += purchase_num
+                                        money += -stock_2*purchase_num
+                                        stock_2_pp += stock_2
+                                        stock_2_pn += purchase_num
+                                    else:
+                                        print('''
 ------------------------
 돈이 {:,}원 부족합니다.
 ------------------------
-            '''.format(stock_2*purchase_num-money))
+                    '''.format(stock_2*purchase_num-money))
+                                else:
+                                        all_purchase_num = math.floor(money/stock_2)
+                                        print('''
+------------------------
+삼선전자 {:,}주를 {:,}원에 풀매수 하셨습니다.
+------------------------
+                    '''.format(all_purchase_num, stock_2*all_purchase_num))
+                                        stock_2_own += all_purchase_num
+                                        money += -(all_purchase_num * stock_2)
+                                        stock_2_pp += stock_2
+                                        stock_2_pn += all_purchase_num
+                            except:
+                                print('''
+------------------------
+잘못된 값입니다.
+------------------------    
+                    ''')
+
                     elif purchase_stock == '데슬라':
                         if stock_3<1000:
                             print('''
@@ -348,23 +393,44 @@ while True:
 ------------------------    
                     ''')
                         else:
-                            purchase_num = int(input('구매할 수량 : '))
-                            if stock_3*purchase_num <= money:
-                                print('''
+                            try:
+                                purchase_num = str(input('구매할 수량 : '))
+                                if purchase_num != '풀매수':
+                                    if stock_3*int(purchase_num) <= money:
+                                        purchase_num = int(purchase_num)
+                                        print('''
 ------------------------
 데슬라 {:,}주를 {:,}원에 구매하셨습니다.
 ------------------------
-            '''.format(purchase_num, stock_3*purchase_num))
-                                stock_3_own += purchase_num
-                                money += -stock_3*purchase_num
-                                stock_3_pp += stock_3
-                                stock_3_pn += purchase_num
-                            else:
-                                print('''
+                    '''.format(purchase_num, stock_3*purchase_num))
+                                        stock_3_own += purchase_num
+                                        money += -stock_3*purchase_num
+                                        stock_3_pp += stock_3
+                                        stock_3_pn += purchase_num
+                                    else:
+                                        print('''
 ------------------------
 돈이 {:,}원 부족합니다.
 ------------------------
-            '''.format(stock_3*purchase_num-money))
+                    '''.format(stock_3*purchase_num-money))
+                                else:
+                                        all_purchase_num = math.floor(money/stock_3)
+                                        print('''
+------------------------
+데슬라 {:,}주를 {:,}원에 풀매수 하셨습니다.
+------------------------
+                    '''.format(all_purchase_num, stock_3*all_purchase_num))
+                                        stock_3_own += all_purchase_num
+                                        money += -(all_purchase_num * stock_3)
+                                        stock_3_pp += stock_3
+                                        stock_3_pn += all_purchase_num
+                            except:
+                                print('''
+------------------------
+잘못된 값입니다.
+------------------------    
+                    ''')
+                                
                     else:
                         print('''
 ------------------------
@@ -374,77 +440,135 @@ while True:
                 elif command[1] == '판매':
                     sell_stock = input('판매할 주식 : ')
                     if sell_stock == '까까오':
-                        if stock_1_own >= 1:
-                            sell_num = int(input('판매할 수량 : '))
-                            if stock_1_own >= sell_num:
-                                print('''
+                        try:
+                            if stock_1_own >= 1:
+                                sell_num = str(input('판매할 수량 : '))
+                                if sell_num != '풀매도':
+                                    if stock_1_own >= sell_num:
+                                        sell_num = int(sell_num)
+                                        print('''
 ------------------------
 까까오 {:,}주를 {:,}원에 판매하셨습니다.
 ------------------------
-                                '''.format(sell_num, stock_1*sell_num))
-                                stock_1_own += -sell_num
-                                money += stock_1*sell_num 
-                                stock_1_pn += -sell_num
-                            else:
-                                print('''
+                                        '''.format(sell_num, stock_1*sell_num))
+                                        stock_1_own += -sell_num
+                                        money += stock_1*sell_num
+                                        stock_1_pn += -sell_num
+                                    else:
+                                        print('''
 ------------------------
 보유한 주식보다 많이 판매할 수는 없습니다.
 ------------------------                                
-                                ''')
-                        else:
-                            print(f'''
+                                        ''')
+                                else:
+                                    all_sell_num = stock_1_own
+                                    print('''
+------------------------
+까까오 {:,}주를 {:,}원에 풀매도 하셨습니다.
+------------------------
+                    '''.format(all_sell_num, stock_1*all_sell_num))
+                                    stock_1_own = 0
+                                    money += (all_sell_num * stock_1)
+                                    stock_1_pn = 0
+                            else:
+                                print(f'''
 ------------------------
 까까오를 보유하고 있지 않습니다.
 ------------------------
-                            ''')
-                    elif sell_stock == '삼선전자':
-                        if stock_2_own >= 1:
-                            sell_num = int(input('판매할 수량 : '))
-                            if stock_2_own >= sell_num:
+                                ''')
+                        except:
                                 print('''
+------------------------
+잘못된 값입니다.
+------------------------    
+                    ''')
+                    elif sell_stock == '삼선전자':
+                        try:
+                            if stock_2_own >= 1:
+                                sell_num = str(input('판매할 수량 : '))
+                                if sell_num != '풀매도':
+                                    if stock_2_own >= sell_num:
+                                        sell_num = int(sell_num)
+                                        print('''
 ------------------------
 삼선전자 {:,}주를 {:,}원에 판매하셨습니다.
 ------------------------
-                                '''.format(sell_num, stock_2*sell_num))
-                                stock_2_own += -sell_num
-                                money += stock_2*sell_num
-                                stock_2_pn += -sell_num
-                            else:
-                                print('''
+                                        '''.format(sell_num, stock_2*sell_num))
+                                        stock_2_own += -sell_num
+                                        money += stock_2*sell_num
+                                        stock_2_pn += -sell_num
+                                    else:
+                                        print('''
 ------------------------
 보유한 주식보다 많이 판매할 수는 없습니다.
+------------------------                                
+                                        ''')
+                                else:
+                                    all_sell_num = stock_2_own
+                                    print('''
 ------------------------
-                                ''')
-                        else:
-                            print(f'''
+삼선전자 {:,}주를 {:,}원에 풀매도 하셨습니다.
+------------------------
+                    '''.format(all_sell_num, stock_2*all_sell_num))
+                                    stock_2_own = 0
+                                    money += (all_sell_num * stock_2)
+                                    stock_2_pn = 0
+                            else:
+                                print(f'''
 ------------------------
 삼선전자를 보유하고 있지 않습니다.
 ------------------------
-                            ''')
-                    elif sell_stock == '데슬라':
-                        if stock_3_own >= 1:
-                            sell_num = int(input('판매할 수량 : '))
-                            if stock_3_own >= sell_num:
+                                ''')
+                        except:
                                 print('''
+------------------------
+잘못된 값입니다.
+------------------------    
+                    ''')
+                    elif sell_stock == '데슬라':
+                        try:
+                            if stock_3_own >= 1:
+                                sell_num = str(input('판매할 수량 : '))
+                                if sell_num != '풀매도':
+                                    if stock_3_own >= sell_num:
+                                        sell_num = int(sell_num)
+                                        print('''
 ------------------------
 데슬라 {:,}주를 {:,}원에 판매하셨습니다.
 ------------------------
-                                '''.format(sell_num, stock_3*sell_num))
-                                stock_3_own += -sell_num
-                                money += stock_3*sell_num
-                                stock_3_pn += -sell_num
-                            else:
-                                print('''
+                                        '''.format(sell_num, stock_3*sell_num))
+                                        stock_3_own += -sell_num
+                                        money += stock_3*sell_num
+                                        stock_3_pn += -sell_num
+                                    else:
+                                        print('''
 ------------------------
 보유한 주식보다 많이 판매할 수는 없습니다.
+------------------------                                
+                                        ''')
+                                else:
+                                    all_sell_num = stock_3_own
+                                    print('''
 ------------------------
-                                ''')
-                        else:
-                            print(f'''
+데슬라 {:,}주를 {:,}원에 풀매도 하셨습니다.
+------------------------
+                    '''.format(all_sell_num, stock_3*all_sell_num))
+                                    stock_3_own = 0
+                                    money += (all_sell_num * stock_3)
+                                    stock_3_pn = 0
+                            else:
+                                print(f'''
 ------------------------
 데슬라를 보유하고 있지 않습니다.
 ------------------------
-                            ''')
+                                ''')
+                        except:
+                                print('''
+------------------------
+잘못된 값입니다.
+------------------------    
+                    ''')
+
                     else:
                         print('''
 ------------------------
