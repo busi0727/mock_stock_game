@@ -312,7 +312,7 @@ xp : {:,} xp
                     elif command[1] == '명령어':
                         print(stock_command_info)
                     elif command[1] == '갱신':
-                        if int(time.time() - start) >= 60:
+                        if int(time.time() - start) >= 0:
                             stock_play()
                             print('''
 ------------------------
@@ -496,7 +496,7 @@ xp : {:,} xp
                                 if stock_1_own >= 1:
                                     sell_num = str(input('판매할 수량 : '))
                                     if sell_num != '풀매도':
-                                        if stock_1_own >= sell_num:
+                                        if stock_1_own >= int(sell_num):
                                             sell_num = int(sell_num)
                                             xp_g = xp_give_sell(sell_num, stock_1)
                                             xp += xp_g
@@ -543,7 +543,7 @@ xp : {:,} xp
                                 if stock_2_own >= 1:
                                     sell_num = str(input('판매할 수량 : '))
                                     if sell_num != '풀매도':
-                                        if stock_2_own >= sell_num:
+                                        if stock_2_own >= int(sell_num):
                                             sell_num = int(sell_num)
                                             xp_g = xp_give_sell(sell_num, stock_2)
                                             xp += xp_g
@@ -590,7 +590,7 @@ xp : {:,} xp
                                 if stock_3_own >= 1:
                                     sell_num = str(input('판매할 수량 : '))
                                     if sell_num != '풀매도':
-                                        if stock_3_own >= sell_num:
+                                        if stock_3_own >= int(sell_num):
                                             sell_num = int(sell_num)
                                             xp_g = xp_give_sell(sell_num, stock_3)
                                             xp += xp_g
