@@ -645,7 +645,7 @@ xp : {:,} xp
 유효하지 않은 명령어입니다.
 ------------------------
                             ''')
-            elif command.startswith('!게임') == True:
+            elif command.startswith('!???') == True:
                 print('''
 ------------------------
 구현 중 입니다.
