@@ -505,9 +505,9 @@ xp : {:,} xp
 까까오 {:,}주를 {:,}원에 판매하셨습니다.
 {:,} xp를 획득하셨습니다.
 ------------------------
-                                            '''.format(sell_num, (stock_1*sell_num)*0.8, xp_g))
+                                            '''.format(sell_num, int((stock_1*sell_num)*0.8), xp_g))
                                             stock_1_own += -sell_num
-                                            money += (stock_1*sell_num)*0.8
+                                            money += int((stock_1*sell_num)*0.8)
                                         else:
                                             print('''
 ------------------------
@@ -523,9 +523,9 @@ xp : {:,} xp
 까까오 {:,}주를 {:,}원에 풀매도 하셨습니다.
 {:,} xp를 획득하셨습니다.
 ------------------------
-                        '''.format(all_sell_num, (stock_1*all_sell_num)*0.8, xp_g))
+                        '''.format(all_sell_num, int((stock_1*all_sell_num)*0.8), xp_g))
                                         stock_1_own = 0
-                                        money += (all_sell_num * stock_1)*0.8
+                                        money += int((stock_1*all_sell_num)*0.8)
                                 else:
                                     print(f'''
 ------------------------
@@ -552,9 +552,9 @@ xp : {:,} xp
 삼선전자 {:,}주를 {:,}원에 판매하셨습니다.
 {:,} xp를 획득하셨습니다.
 ------------------------
-                                            '''.format(sell_num, (stock_2*sell_num)*0.8, xp_g))
+                                            '''.format(sell_num, int((stock_2*sell_num)*0.8), xp_g))
                                             stock_2_own += -sell_num
-                                            money += (stock_2*sell_num)*0.8
+                                            money += int((stock_2*sell_num)*0.8)
                                         else:
                                             print('''
 ------------------------
@@ -570,9 +570,9 @@ xp : {:,} xp
 삼선전자 {:,}주를 {:,}원에 풀매도 하셨습니다.
 {:,} xp를 획득하셨습니다.
 ------------------------
-                        '''.format(all_sell_num, (stock_2*all_sell_num)*0.8, xp_g))
+                        '''.format(all_sell_num, int((stock_2*all_sell_num)*0.8), xp_g))
                                         stock_2_own = 0
-                                        money += (all_sell_num * stock_2)*0.8
+                                        money += int((stock_2*all_sell_num)*0.8)
                                 else:
                                     print(f'''
 ------------------------
@@ -599,9 +599,9 @@ xp : {:,} xp
 데슬라 {:,}주를 {:,}원에 판매하셨습니다.
 {:,} xp를 획득하셨습니다.
 ------------------------
-                                            '''.format(sell_num, (stock_3*sell_num)*0.8, xp_g))
+                                            '''.format(sell_num, int((stock_3*sell_num)*0.8), xp_g))
                                             stock_3_own += -sell_num
-                                            money += stock_3*sell_num
+                                            money += int((stock_3*sell_num)*0.8)
                                         else:
                                             print('''
 ------------------------
@@ -617,9 +617,9 @@ xp : {:,} xp
 데슬라 {:,}주를 {:,}원에 풀매도 하셨습니다.
 {:,} xp를 획득하셨습니다.
 ------------------------
-                        '''.format(all_sell_num, (stock_3*all_sell_num)*0.8, xp_g))
+                        '''.format(all_sell_num, int((stock_3*all_sell_num)*0.8), xp_g))
                                         stock_3_own = 0
-                                        money += (all_sell_num * stock_3)*0.8
+                                        money += int((stock_3*all_sell_num)*0.8)
                                 else:
                                     print(f'''
 ------------------------
