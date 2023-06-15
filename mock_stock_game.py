@@ -312,7 +312,7 @@ xp : {:,} xp
                     elif command[1] == '명령어':
                         print(stock_command_info)
                     elif command[1] == '갱신':
-                        if int(time.time() - start) >= 0:
+                        if int(time.time() - start) >= 60:
                             stock_play()
                             print('''
 ------------------------
