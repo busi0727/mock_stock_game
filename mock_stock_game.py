@@ -2,6 +2,9 @@ import random
 import time
 import math
 
+# 상장 폐지 계획중
+# 주식 이름 랜덤 변동 계획중
+
 # 주식이 올랐다!
 def stock_up(chs_):
     global increase
@@ -93,7 +96,7 @@ def stock_play():
     global stock_2_down_
     global stock_3_down_
 
-    for i in range(1,6):
+    for i in range(3,8):
         stock_variance()
 
     stock_1_up_ = stock_1_up
@@ -114,7 +117,7 @@ def stock_play():
 
 def xp_give_buy(transaction_num, stock_price):
     if stock_price <= 5000:
-        xp_num = int(transaction_num*int((stock_price)/1000)/(transaction_num/3))
+        xp_num = int(transaction_num*int((stock_price)/1000)/2)
         return xp_num
     elif stock_price <= 20000:
         xp_num = int(transaction_num*int((stock_price)/1000))
@@ -131,7 +134,7 @@ def xp_give_sell(transaction_num, stock_price):
         xp_num = int(transaction_num*int((stock_price)/1000))
         return xp_num
     else:
-        xp_num = int(transaction_num*int((stock_price)/1000)/(transaction_num/3))
+        xp_num = int(transaction_num*int((stock_price)/1000)/2)
         return xp_num
 
 def level_up(old_level):
@@ -163,6 +166,18 @@ def level_up(old_level):
 축하합니다! {} lv이 되었습니다.
 -------------------
                 '''.format(level))
+        
+def setting_ON_OFF(setting_num):
+    if setting_num == True:
+        return False
+    else:
+        return True
+
+def setting_value(setting_num):
+    if setting_num == True:
+        return 'ON'
+    else:
+        return 'OFF'
 
 #초기 설정 시작
 commhelp = '''
@@ -226,6 +241,7 @@ while True:
         ''')
 
     if play == True:
+        # stock
         stock_1 = 10000
         stock_2 = 10000
         stock_3 = 10000
@@ -238,11 +254,17 @@ while True:
         stock_1_own = 0
         stock_2_own = 0
         stock_3_own = 0
-        start = 100
-
+        # time
+        tiem_start = 100
+        # setting
+        setting_1 = False
+        setting_1_value = setting_value(setting_1)
+        # level, xp
         level = 1
         xp = 0
         xp_g = 0
+
+
         money = 100000
         print('기초 자금 10만원이 지급 되었습니다.')
         user_name = str(input('당신의 닉네임을 입력해주세요! : '))
@@ -258,6 +280,9 @@ while True:
 -----명령어 목록-----
 !명령어 : 명령어 목록을 보여줍니다.
 !내정보 : 나의 대한 정보를 보여줍니다.
+!설정 : 변경 가능한 설정을 보여줍니다.
+- 설정 방법 : !설정 (원하는 설정 번호)
+- Ex) !설정 1 -> 설정 1이 변경됩니다(off -> on / on -> off)
 !주식 명령어 : 주식에 관련한 명령어를 보여줍니다.
 !??? : 업데이트 예정입니다.
 -----------------
@@ -290,6 +315,26 @@ xp : {:,} xp
                 '''.format(user_name , level, xp, money))
             elif command == '!명령어':
                 print(command_info)
+
+            elif command.startswith('!설정') == True:
+                command = command.split(' ')
+                if command[0] == '!설정':
+                    if len(command) == 1:
+                        print(f'''
+-----------------
+Setting 1 : {setting_1_value}
+- 주식 갱신시 목록을 같이 보여줍니다.
+-----------------
+        ''')
+                    elif command[1] == '1':
+                        setting_1 = setting_ON_OFF(setting_1)
+                        setting_1_value = setting_value(setting_1)
+                        print(f'''
+-----------------
+Setting 1이 {setting_1_value} 되었습니다.
+-----------------      
+                        ''')
+                        
             elif command.startswith('!주식') == True:
                 command = command.split(' ')
                 if command[0] == '!주식':
@@ -312,18 +357,29 @@ xp : {:,} xp
                     elif command[1] == '명령어':
                         print(stock_command_info)
                     elif command[1] == '갱신':
-                        if int(time.time() - start) >= 60:
+                        if int(time.time() - tiem_start) >= 60:
                             stock_play()
                             print('''
 ------------------------
 주식이 갱신 되었습니다.
 ------------------------
-                ''')
-                            start = int(time.time())
+                ''')        
+                            if setting_1 == True:
+                                print('''
+-----주식 목록-----
+까까오의 주식 가격 : {:,}원    ㅣ {:,}↑ {:,}↓ {:,}원
+삼선전자의 주식 가격 : {:,}원  ㅣ {:,}↑ {:,}↓ {:,}원
+데슬라의 주식 가격 : {:,}원    ㅣ {:,}↑ {:,}↓ {:,}원
+---------------
+    '''.format(stock_1, stock_1_up_, stock_1_down_, stock_1_up_ - stock_1_down_,\
+            stock_2, stock_2_up_, stock_2_down_, stock_2_up_ - stock_2_down_,\
+                stock_3, stock_3_up_, stock_3_down_, stock_3_up_ - stock_3_down_))
+
+                            tiem_start = int(time.time())
                         else:
                             print(f'''
 ------------------------
-다음 주식 갱신 까지 {60-int(time.time() - start)}초 남았습니다.
+다음 주식 갱신 까지 {60-int(time.time() - tiem_start)}초 남았습니다.
 ------------------------
                 ''')
                     elif command[1] == '보유':
