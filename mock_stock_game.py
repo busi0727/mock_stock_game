@@ -2,8 +2,6 @@ import random
 import time
 import math
 
-# 상장 폐지 계획중
-# 주식 이름 랜덤 변동 계획중
 
 # 주식이 올랐다!
 def stock_up(chs_):
@@ -19,7 +17,7 @@ def stock_up(chs_):
     return chs_, up_value
 
 # 주식이 떨어졌다!
-def stock_down(chs_):
+def stock_down(chs_, stock_name_):
     global decrease
 
     if chs_ <= 20000:
@@ -28,10 +26,99 @@ def stock_down(chs_):
         decrease = random.randrange(10000, 20000)
     chs_ -= decrease
     down_value = decrease
-    if chs_ <= 0:
-        chs_ = 1
+    if start_save == 0:
+        if 3000 < chs_ <= 5000:
+            h_ = random.randrange(0, 100)
+            if h_ >= 70:
+                stock_delisting(stock_name_)
+                chs_ = 10000
+                down_value = 0
+        elif chs_ <= 3000:
+            h_ = random.randrange(0, 100)
+            if h_ >= 50:
+                stock_delisting(stock_name_)
+                chs_ = 10000
+                down_value = 0
+        if chs_ <= 0:
+            stock_delisting(stock_name_)
+            chs_ = 10000
+            down_value = 0
 
     return chs_, down_value
+
+def stock_delisting(stock_name_):
+    global stock_name
+    global stock_1_name
+    global stock_2_name
+    global stock_3_name
+    global stock_1
+    global stock_2
+    global stock_3
+    global stock_1_own
+    global stock_2_own
+    global stock_3_own
+
+    
+    if stock_name_ == 1:
+        reason = delisting_reason(stock_1_name)
+        print(f'''
+-------------------
+※ 속보 {stock_1_name} 파산
+
+{reason}
+-------------------            
+            ''')
+        stock_1_name = stock_name[random.randrange(0,10)]
+        while stock_1_name == stock_3_name or stock_1_name == stock_2_name:
+            stock_1_name = stock_name[random.randrange(0,10)]
+        print(f'''
+-------------------
+{stock_1_name} 주식이 추가되었습니다.
+-------------------            
+            ''')
+        stock_1_own =0
+    elif stock_name_ == 2:
+        reason = delisting_reason(stock_2_name)
+        print(f'''
+-------------------
+※ 속보 {stock_2_name} 파산
+
+{reason}
+-------------------            
+            ''')
+        stock_2_name = stock_name[random.randrange(0,10)]
+        while stock_2_name == stock_1_name or stock_2_name == stock_3_name:
+            stock_2_name = stock_name[random.randrange(0,10)]
+        print(f'''
+-------------------
+{stock_2_name} 주식이 추가되었습니다.
+-------------------            
+            ''')
+        stock_2_own =0
+    else:
+        reason = delisting_reason(stock_3_name)
+        print(f'''
+-------------------
+※ 속보 {stock_3_name} 파산
+
+{reason}
+-------------------            
+            ''')
+        stock_3_name = stock_name[random.randrange(0,10)]
+        while stock_3_name == stock_1_name or stock_3_name == stock_2_name:
+            stock_3_name = stock_name[random.randrange(0,10)]
+        print(f'''
+-------------------
+{stock_3_name} 주식이 추가되었습니다.
+-------------------            
+            ''')
+        stock_3_own =0
+
+def delisting_reason(stock_name_):
+    reason_list =['집에서 치킨을 먹다가 실수로 상장 폐지하였습니다.', '외계인에게 납치당해 상장 폐지되었습니다.', '현질하려고 주식을 모두 팔아 상장 폐지되었습니다',\
+                  '술 마시고 행패를 부리다가 경찰에 잡혀서 상장 폐지 되었습니다.', '자신도 모르게 상장 폐지되었습니다.', '상장 폐지를 하면 어떻게 되는지 궁금하여 상장 폐지 하였습니다.']
+    reason = (stock_name_+'의 사장이 '+ reason_list[random.randrange(0, 6)])
+    return reason
 
 # 주식 변화율 설정
 def stock_variance():
@@ -55,27 +142,27 @@ def stock_variance():
         if True == random.choice([True, False]):
             chs, up = stock_up(chs)
         else:
-            chs, down = stock_down(chs)
+            chs, down = stock_down(chs, chs_N)
         stock_1 = chs
         stock_1_up += up
         stock_1_down += down
 
-    elif chs_N ==2:
+    elif chs_N == 2:
         chs = stock_2
         if True == random.choice([True, False]):
             chs, up = stock_up(chs)
         else:
-            chs, down = stock_down(chs)
+            chs, down = stock_down(chs, chs_N)
         stock_2 = chs
         stock_2_up += up
         stock_2_down += down
 
-    elif chs_N ==3:
+    elif chs_N == 3:
         chs = stock_3
         if True == random.choice([True, False]):
             chs, up = stock_up(chs)
         else:
-            chs, down = stock_down(chs)
+            chs, down = stock_down(chs, chs_N)
         stock_3 = chs
         stock_3_up += up
         stock_3_down += down
@@ -241,6 +328,16 @@ while True:
         ''')
 
     if play == True:
+        stock_name = ['까까오', '삼선전자', '데슬라', '대항항공', '네이보', '롯떼 그룹', '형대 그룹', '애풀', '넥플릭수', '인델',\
+                      '노지텍', '넷마불', '나익키', '맥도날도', '구팡']
+        stock_1_name = stock_name[random.randrange(0,10)]
+        stock_2_name = stock_1_name
+        stock_3_name = stock_1_name
+        while stock_1_name == stock_2_name:
+            stock_2_name = stock_name[random.randrange(0,10)]
+        while stock_1_name == stock_3_name or stock_2_name == stock_3_name:
+            stock_3_name = stock_name[random.randrange(0,10)]
+        start_save = 1
         # stock
         stock_1 = 10000
         stock_2 = 10000
@@ -347,17 +444,18 @@ Setting 1이 {setting_1_value} 되었습니다.
                     elif command[1] == '목록':
                         print('''
 -----주식 목록-----
-까까오의 주식 가격 : {:,}원    ㅣ {:,}↑ {:,}↓ {:,}원
-삼선전자의 주식 가격 : {:,}원  ㅣ {:,}↑ {:,}↓ {:,}원
-데슬라의 주식 가격 : {:,}원    ㅣ {:,}↑ {:,}↓ {:,}원
+{}의 주식 가격 : {:,}원    ㅣ {:,}↑ {:,}↓ {:,}원
+{}의 주식 가격 : {:,}원  ㅣ {:,}↑ {:,}↓ {:,}원
+{}의 주식 가격 : {:,}원    ㅣ {:,}↑ {:,}↓ {:,}원
 ---------------
-    '''.format(stock_1, stock_1_up_, stock_1_down_, stock_1_up_ - stock_1_down_,\
-            stock_2, stock_2_up_, stock_2_down_, stock_2_up_ - stock_2_down_,\
-                stock_3, stock_3_up_, stock_3_down_, stock_3_up_ - stock_3_down_))
+    '''.format(stock_1_name, stock_1, stock_1_up_, stock_1_down_, stock_1_up_ - stock_1_down_,\
+            stock_2_name, stock_2, stock_2_up_, stock_2_down_, stock_2_up_ - stock_2_down_,\
+                stock_3_name, stock_3, stock_3_up_, stock_3_down_, stock_3_up_ - stock_3_down_))
                     elif command[1] == '명령어':
                         print(stock_command_info)
                     elif command[1] == '갱신':
-                        if int(time.time() - tiem_start) >= 60:
+                        start_save = 0
+                        if int(time.time() - tiem_start) >= 0:
                             stock_play()
                             print('''
 ------------------------
@@ -367,13 +465,13 @@ Setting 1이 {setting_1_value} 되었습니다.
                             if setting_1 == True:
                                 print('''
 -----주식 목록-----
-까까오의 주식 가격 : {:,}원    ㅣ {:,}↑ {:,}↓ {:,}원
-삼선전자의 주식 가격 : {:,}원  ㅣ {:,}↑ {:,}↓ {:,}원
-데슬라의 주식 가격 : {:,}원    ㅣ {:,}↑ {:,}↓ {:,}원
+{}의 주식 가격 : {:,}원    ㅣ {:,}↑ {:,}↓ {:,}원
+{}의 주식 가격 : {:,}원  ㅣ {:,}↑ {:,}↓ {:,}원
+{}의 주식 가격 : {:,}원    ㅣ {:,}↑ {:,}↓ {:,}원
 ---------------
-    '''.format(stock_1, stock_1_up_, stock_1_down_, stock_1_up_ - stock_1_down_,\
-            stock_2, stock_2_up_, stock_2_down_, stock_2_up_ - stock_2_down_,\
-                stock_3, stock_3_up_, stock_3_down_, stock_3_up_ - stock_3_down_))
+    '''.format(stock_1_name, stock_1, stock_1_up_, stock_1_down_, stock_1_up_ - stock_1_down_,\
+            stock_2_name, stock_2, stock_2_up_, stock_2_down_, stock_2_up_ - stock_2_down_,\
+                stock_3_name, stock_3, stock_3_up_, stock_3_down_, stock_3_up_ - stock_3_down_))
 
                             tiem_start = int(time.time())
                         else:
@@ -385,16 +483,16 @@ Setting 1이 {setting_1_value} 되었습니다.
                     elif command[1] == '보유':
                         print('''
 -----보유하고 있는 주식-----
-까까오 : {:,}주 / 총 {:,}원
-삼선전자 : {:,}주 / 총 {:,}원
-데슬라 : {:,}주 / 총 {:,}원
+{} : {:,}주 / 총 {:,}원
+{} : {:,}주 / 총 {:,}원
+{} : {:,}주 / 총 {:,}원
 ------------------------
-                        '''.format(stock_1_own, stock_1*stock_1_own,\
-                                stock_2_own, stock_2*stock_2_own,\
-                                    stock_3_own, stock_3*stock_3_own))
+                        '''.format(stock_1_name, stock_1_own, stock_1*stock_1_own,\
+                                stock_2_name, stock_2_own, stock_2*stock_2_own,\
+                                    stock_3_name, stock_3_own, stock_3*stock_3_own))
                     elif command[1] == '구매':
                         purchase_stock = input('구매할 주식 : ')
-                        if purchase_stock == '까까오':
+                        if purchase_stock == stock_1_name:
                             if stock_1<1000:
                                 print('''
 ------------------------
@@ -411,10 +509,10 @@ Setting 1이 {setting_1_value} 되었습니다.
                                             xp += xp_g
                                             print('''
 ------------------------
-까까오 {:,}주를 {:,}원에 구매하셨습니다.
+{} {:,}주를 {:,}원에 구매하셨습니다.
 {:,} xp를 획득하셨습니다.
 ------------------------
-                        '''.format(purchase_num, stock_1*purchase_num, xp_g))
+                        '''.format(stock_1_name, purchase_num, stock_1*purchase_num, xp_g))
                                             stock_1_own += purchase_num
                                             money += -stock_1*purchase_num
                                         else:
@@ -429,10 +527,10 @@ Setting 1이 {setting_1_value} 되었습니다.
                                             xp += xp_g
                                             print('''
 ------------------------
-까까오 {:,}주를 {:,}원에 풀매수 하셨습니다.
+{} {:,}주를 {:,}원에 풀매수 하셨습니다.
 {:,} xp를 획득하셨습니다.
 ------------------------
-                        '''.format(all_purchase_num, stock_1*all_purchase_num, xp_g))
+                        '''.format(stock_1_name, all_purchase_num, stock_1*all_purchase_num, xp_g))
                                             stock_1_own += all_purchase_num
                                             money += -(all_purchase_num * stock_1)
                                 except:
@@ -442,7 +540,7 @@ Setting 1이 {setting_1_value} 되었습니다.
 ------------------------    
                         ''')
 
-                        elif purchase_stock == '삼선전자':
+                        elif purchase_stock == stock_2_name:
                             if stock_2<1000:
                                 print('''
 ------------------------
@@ -459,10 +557,10 @@ Setting 1이 {setting_1_value} 되었습니다.
                                             xp += xp_g
                                             print('''
 ------------------------
-삼선전자 {:,}주를 {:,}원에 구매하셨습니다.
+{} {:,}주를 {:,}원에 구매하셨습니다.
 {:,} xp를 획득하셨습니다.
 ------------------------
-                        '''.format(purchase_num, stock_2*purchase_num, xp_g))
+                        '''.format(stock_2_name, purchase_num, stock_2*purchase_num, xp_g))
                                             stock_2_own += purchase_num
                                             money += -stock_2*purchase_num
                                         else:
@@ -477,10 +575,10 @@ Setting 1이 {setting_1_value} 되었습니다.
                                             xp += xp_g
                                             print('''
 ------------------------
-삼선전자 {:,}주를 {:,}원에 풀매수 하셨습니다.
+{} {:,}주를 {:,}원에 풀매수 하셨습니다.
 {:,} xp를 획득하셨습니다.
 ------------------------
-                        '''.format(all_purchase_num, stock_2*all_purchase_num, xp_g))
+                        '''.format(stock_2_name, all_purchase_num, stock_2*all_purchase_num, xp_g))
                                             stock_2_own += all_purchase_num
                                             money += -(all_purchase_num * stock_2)
                                             xp += xp_give_buy(all_purchase_num, stock_1)
@@ -491,7 +589,7 @@ Setting 1이 {setting_1_value} 되었습니다.
 ------------------------    
                         ''')
 
-                        elif purchase_stock == '데슬라':
+                        elif purchase_stock == stock_3_name:
                             if stock_3<1000:
                                 print('''
 ------------------------
@@ -508,10 +606,10 @@ Setting 1이 {setting_1_value} 되었습니다.
                                             xp += xp_g
                                             print('''
 ------------------------
-데슬라 {:,}주를 {:,}원에 구매하셨습니다.
+{} {:,}주를 {:,}원에 구매하셨습니다.
 {:,} xp를 획득하셨습니다.
 ------------------------ 
-                        '''.format(purchase_num, stock_3*purchase_num, xp_g))
+                        '''.format(stock_3_name, purchase_num, stock_3*purchase_num, xp_g))
                                             stock_3_own += purchase_num
                                             money += -stock_3*purchase_num
                                         else:
@@ -526,10 +624,10 @@ Setting 1이 {setting_1_value} 되었습니다.
                                             xp += xp_g
                                             print('''
 ------------------------
-데슬라 {:,}주를 {:,}원에 풀매수 하셨습니다.
+{} {:,}주를 {:,}원에 풀매수 하셨습니다.
 {:,} xp를 획득하셨습니다.
 ------------------------
-                        '''.format(all_purchase_num, stock_3*all_purchase_num, xp_g))
+                        '''.format(stock_3_name, all_purchase_num, stock_3*all_purchase_num, xp_g))
                                             stock_3_own += all_purchase_num
                                             money += -(all_purchase_num * stock_3)
                                 except:
@@ -547,7 +645,7 @@ Setting 1이 {setting_1_value} 되었습니다.
             ''')
                     elif command[1] == '판매':
                         sell_stock = input('판매할 주식 : ')
-                        if sell_stock == '까까오':
+                        if sell_stock == stock_1_name:
                             try:
                                 if stock_1_own >= 1:
                                     sell_num = str(input('판매할 수량 : '))
@@ -558,10 +656,10 @@ Setting 1이 {setting_1_value} 되었습니다.
                                             xp += xp_g
                                             print('''
 ------------------------
-까까오 {:,}주를 {:,}원에 판매하셨습니다.
+{} {:,}주를 {:,}원에 판매하셨습니다.
 {:,} xp를 획득하셨습니다.
 ------------------------
-                                            '''.format(sell_num, int((stock_1*sell_num)*0.8), xp_g))
+                                            '''.format(stock_1_name, sell_num, int((stock_1*sell_num)*0.8), xp_g))
                                             stock_1_own += -sell_num
                                             money += int((stock_1*sell_num)*0.8)
                                         else:
@@ -576,16 +674,16 @@ Setting 1이 {setting_1_value} 되었습니다.
                                         xp += xp_g
                                         print('''
 ------------------------
-까까오 {:,}주를 {:,}원에 풀매도 하셨습니다.
+{} {:,}주를 {:,}원에 풀매도 하셨습니다.
 {:,} xp를 획득하셨습니다.
 ------------------------
-                        '''.format(all_sell_num, int((stock_1*all_sell_num)*0.8), xp_g))
+                        '''.format(stock_1_name, all_sell_num, int((stock_1*all_sell_num)*0.8), xp_g))
                                         stock_1_own = 0
                                         money += int((stock_1*all_sell_num)*0.8)
                                 else:
                                     print(f'''
 ------------------------
-까까오를 보유하고 있지 않습니다.
+{stock_1_name}를 보유하고 있지 않습니다.
 ------------------------
                                     ''')
                             except:
@@ -594,7 +692,7 @@ Setting 1이 {setting_1_value} 되었습니다.
 잘못된 값입니다.
 ------------------------    
                         ''')
-                        elif sell_stock == '삼선전자':
+                        elif sell_stock == stock_2_name:
                             try:
                                 if stock_2_own >= 1:
                                     sell_num = str(input('판매할 수량 : '))
@@ -605,10 +703,10 @@ Setting 1이 {setting_1_value} 되었습니다.
                                             xp += xp_g
                                             print('''
 ------------------------
-삼선전자 {:,}주를 {:,}원에 판매하셨습니다.
+{} {:,}주를 {:,}원에 판매하셨습니다.
 {:,} xp를 획득하셨습니다.
 ------------------------
-                                            '''.format(sell_num, int((stock_2*sell_num)*0.8), xp_g))
+                                            '''.format(stock_2_name, sell_num, int((stock_2*sell_num)*0.8), xp_g))
                                             stock_2_own += -sell_num
                                             money += int((stock_2*sell_num)*0.8)
                                         else:
@@ -623,16 +721,16 @@ Setting 1이 {setting_1_value} 되었습니다.
                                         xp += xp_g
                                         print('''
 ------------------------
-삼선전자 {:,}주를 {:,}원에 풀매도 하셨습니다.
+{} {:,}주를 {:,}원에 풀매도 하셨습니다.
 {:,} xp를 획득하셨습니다.
 ------------------------
-                        '''.format(all_sell_num, int((stock_2*all_sell_num)*0.8), xp_g))
+                        '''.format(stock_2_name, all_sell_num, int((stock_2*all_sell_num)*0.8), xp_g))
                                         stock_2_own = 0
                                         money += int((stock_2*all_sell_num)*0.8)
                                 else:
                                     print(f'''
 ------------------------
-삼선전자를 보유하고 있지 않습니다.
+{stock_2_name}를 보유하고 있지 않습니다.
 ------------------------
                                     ''')
                             except:
@@ -641,7 +739,7 @@ Setting 1이 {setting_1_value} 되었습니다.
 잘못된 값입니다.
 ------------------------    
                         ''')
-                        elif sell_stock == '데슬라':
+                        elif sell_stock == stock_3_name:
                             try:
                                 if stock_3_own >= 1:
                                     sell_num = str(input('판매할 수량 : '))
@@ -652,10 +750,10 @@ Setting 1이 {setting_1_value} 되었습니다.
                                             xp += xp_g
                                             print('''
 ------------------------
-데슬라 {:,}주를 {:,}원에 판매하셨습니다.
+{} {:,}주를 {:,}원에 판매하셨습니다.
 {:,} xp를 획득하셨습니다.
 ------------------------
-                                            '''.format(sell_num, int((stock_3*sell_num)*0.8), xp_g))
+                                            '''.format(stock_3_name, sell_num, int((stock_3*sell_num)*0.8), xp_g))
                                             stock_3_own += -sell_num
                                             money += int((stock_3*sell_num)*0.8)
                                         else:
@@ -670,16 +768,16 @@ Setting 1이 {setting_1_value} 되었습니다.
                                         xp += xp_g
                                         print('''
 ------------------------
-데슬라 {:,}주를 {:,}원에 풀매도 하셨습니다.
+{} {:,}주를 {:,}원에 풀매도 하셨습니다.
 {:,} xp를 획득하셨습니다.
 ------------------------
-                        '''.format(all_sell_num, int((stock_3*all_sell_num)*0.8), xp_g))
+                        '''.format(stock_3_name, all_sell_num, int((stock_3*all_sell_num)*0.8), xp_g))
                                         stock_3_own = 0
                                         money += int((stock_3*all_sell_num)*0.8)
                                 else:
                                     print(f'''
 ------------------------
-데슬라를 보유하고 있지 않습니다.
+{stock_3_name}를 보유하고 있지 않습니다.
 ------------------------
                                     ''')
                             except:
