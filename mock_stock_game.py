@@ -8,7 +8,7 @@ def stock_up(chs_):
     global increase
 
     if chs_ <= 20000: 
-        increase = random.randrange(1000, 5000)
+        increase = random.randrange(1500, 5000)
     elif chs_ <=100000:
         increase = random.randrange(5000, 20000)
     chs_ += increase
@@ -21,7 +21,7 @@ def stock_down(chs_, stock_name_):
     global decrease
 
     if chs_ <= 20000:
-        decrease = random.randrange(1000, 3000)
+        decrease = random.randrange(1000, 4000)
     elif chs_ <=100000:
         decrease = random.randrange(10000, 20000)
     chs_ -= decrease
@@ -455,7 +455,7 @@ Setting 1이 {setting_1_value} 되었습니다.
                         print(stock_command_info)
                     elif command[1] == '갱신':
                         start_save = 0
-                        if int(time.time() - tiem_start) >= 0:
+                        if int(time.time() - tiem_start) >= 60:
                             stock_play()
                             print('''
 ------------------------
