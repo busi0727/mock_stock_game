@@ -503,8 +503,8 @@ Setting 1이 {setting_1_value} 되었습니다.
                                 try:
                                     purchase_num = str(input('구매할 수량 : '))
                                     if purchase_num != '풀매수':
-                                        if stock_1*int(purchase_num) <= money:
-                                            purchase_num = int(purchase_num)
+                                        purchase_num = int(purchase_num)
+                                        if stock_1*int(purchase_num) <= money:                                           
                                             xp_g = xp_give_buy(purchase_num, stock_1)
                                             xp += xp_g
                                             print('''
@@ -551,8 +551,8 @@ Setting 1이 {setting_1_value} 되었습니다.
                                 try:
                                     purchase_num = str(input('구매할 수량 : '))
                                     if purchase_num != '풀매수':
+                                        purchase_num = int(purchase_num)
                                         if stock_2*int(purchase_num) <= money:
-                                            purchase_num = int(purchase_num)
                                             xp_g = xp_give_buy(purchase_num, stock_2)
                                             xp += xp_g
                                             print('''
@@ -600,8 +600,8 @@ Setting 1이 {setting_1_value} 되었습니다.
                                 try:
                                     purchase_num = str(input('구매할 수량 : '))
                                     if purchase_num != '풀매수':
+                                        purchase_num = int(purchase_num)
                                         if stock_3*int(purchase_num) <= money:
-                                            purchase_num = int(purchase_num)
                                             xp_g = xp_give_buy(purchase_num, stock_3)
                                             xp += xp_g
                                             print('''
