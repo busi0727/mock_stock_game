@@ -1,7 +1,7 @@
-# mock stock game v2.1.0
-**mock stock game v2.1.0**
+# mock stock game v2.1.1
+**mock stock game v2.1.1**
 
-**모의 주식 게임 v2.1.0**
+**모의 주식 게임 v2.1.1**
 
 # 이용 방법
 
