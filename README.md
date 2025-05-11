@@ -127,4 +127,4 @@ level : 일정 조건 만큼 xp를 모으면 레벨업합니다.
 # 개발자 정보
 **Made by busi**
 
-**Bug report at https://litt.ly/busi**
+**Bug report busi0727**
