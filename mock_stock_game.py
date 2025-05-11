@@ -1,3 +1,4 @@
+# v2.1.1
 import random
 import time
 import math
@@ -306,7 +307,7 @@ print('''
 '!도움말'을 입력하여 게임이용에 관한 도움말을 볼 수 있습니다.
 
 Made by busi
-문의 및 버그제보 : https://litt.ly/busi
+문의 및 버그제보 : busi0727
 ''')
 
 while True:
